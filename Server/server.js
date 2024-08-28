@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 // Define the port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 60001;
 
 // Simple route to check server status
 app.get('/ping', (req, res) => {
