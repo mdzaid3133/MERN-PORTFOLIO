@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import { FaEdit } from "react-icons/fa";
 import store from '@/Redux/store';
-import { deleteProjectData, fetchProjectData ,addProjectData, updateProjectData} from '@/Redux/slices/projectSlice';
+import { deleteProjectData, fetchProjectData, addProjectData, updateProjectData } from '@/Redux/slices/projectSlice';
 
 function ProjectAdminView() {
   const [formData, setFormData] = useState({});
@@ -72,23 +72,23 @@ function ProjectAdminView() {
     }
   };
 
-  const handleUpdate = async()=>{
-     try {
-          await dispatch(updateProjectData([addFormData, formData._id]));
-     } catch (error) {
-      console.error("Error updatin project data : ",error);
-     }
+  const handleUpdate = async () => {
+    try {
+      await dispatch(updateProjectData([addFormData, formData._id]));
+    } catch (error) {
+      console.error("Error updatin project data : ", error);
+    }
   }
 
-  const handleEdit = async(project)=>{
+  const handleEdit = async (project) => {
     setFormData(project);
     setImagePreview(project?.projectImage?.secure_url)
-   const dateStr = project?.createDate;
-   const date = new Date(dateStr);
-   // Format as YYYY-MM-DD
-   const formattedDate = date.toISOString().split('T')[0];
+    const dateStr = project?.createDate;
+    const date = new Date(dateStr);
+    // Format as YYYY-MM-DD
+    const formattedDate = date.toISOString().split('T')[0];
 
-    console.log("object created",project);
+    console.log("object created", project);
   }
 
   const controls = [
@@ -121,7 +121,7 @@ function ProjectAdminView() {
       name: 'teckStack',
 
     },
-    
+
     {
       label: 'Enter project live URL ',
       type: 'text',
@@ -145,9 +145,9 @@ function ProjectAdminView() {
   ]
   return (
     <div>
-    <div className='p-10 '>
-    <h1 className='text-2xl font-bold text-orange-600'> Project Section</h1>
-    <div className="mt-10 flex flex-wrap gap-5">
+      <div className='p-10 '>
+        <h1 className='text-2xl font-bold text-orange-600'> Project Section</h1>
+        <div className="mt-10 flex flex-wrap gap-5">
           {projectsData &&
             projectsData?.map((project) => (
               <div key={project?._id} className="w-[300px] border rounded-lg overflow-hidden py-3 flex flex-col justify-between  shadow-md shadow-white">
@@ -166,14 +166,14 @@ function ProjectAdminView() {
                     className="text-red-700 cursor-pointer text-xl"
                   />
 
-                   <FaEdit onClick={() => handleEdit(project)}
+                  <FaEdit onClick={() => handleEdit(project)}
                     className="text-yellow-400 cursor-pointer text-xl" />
                 </h3>
               </div>
             ))}
         </div>
-     <div className='mt-8 border p-5 rounded-lg bg-gray-800'>
-     <FormControls
+        <div className='mt-8 border p-5 rounded-lg bg-gray-800'>
+          <FormControls
             controls={controls}
             formData={formData}
             setFormData={setFormData}
@@ -182,14 +182,18 @@ function ProjectAdminView() {
             getImage={getImage}
             handleChange={handleChange}
           />
-     <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
-     onClick={handleAdd}>Add Info</button>
 
-<button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
-     onClick={handleUpdate}>Update Info</button>
-     </div>
-   </div>
-   </div>
+        </div>
+
+        <div className='mt-4 flex justify-end gap-4'>
+          <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
+            onClick={handleAdd}>Add Info</button>
+
+          <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
+            onClick={handleUpdate}>Update Info</button>
+        </div>
+      </div>
+    </div>
   )
 }
 

@@ -12,7 +12,7 @@ const initialState = {
 export const fetAboutData = createAsyncThunk('about/fetchAboutData', async (_, { rejectWithValue }) => {
     try {
         // Perform the API request
-        const response = axios.get('http://localhost:6001/admin/v1/about');
+        const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/about');
 
         // Show a loading toast while waiting for the response
         toast.promise(response, {
@@ -57,7 +57,7 @@ export const updateAboutData = createAsyncThunk(
         console.log("Updating data for ID:", id);
   
         // Making the PUT request to update home data
-        const updatePromise = axios.put(`http://localhost:6001/admin/v1/about/${id}`, dataObject);
+        const updatePromise = axios.put(`https://mern-portfolio-ywxa.onrender.com/admin/v1/about/${id}`, dataObject);
   
         toast.promise(updatePromise, {
           pending: "Wait! Updating home data...",

@@ -19,6 +19,7 @@ function Project() {
     const dispatch = useDispatch()
 
     const { projectsData } = useSelector((store) => store.project)
+    const {currentMode} = useSelector((store)=> store.mode)
 
 
 

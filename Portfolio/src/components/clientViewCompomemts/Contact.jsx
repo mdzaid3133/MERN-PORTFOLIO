@@ -76,12 +76,12 @@ function Contact() {
                     </div>
 
                     {/* contact form */}
-                    <div data-aos="flip-left" className='md:w-1/2 w-full'>
+                    <div data-aos="flip-left" className='md:w-1/2 w-full rounded-lg border border-gray-800 p-4'>
                         <form ref={form} onSubmit={sendEmail}>
-                            <Input type="text" name="user_name"  placeholder="Full Name" className="bg-transparent text-white w-full mb-5" />
-                            <Input type="email" name="user_email" placeholder="Email" className="bg-transparent text-white w-full mb-5" />
-                            <Textarea  name="message" placeholder="Your Message" className="bg-transparent text-white w-full mb-5" />
-                            <Button type="submit" value="Send" className="text-white bg-blue-500 hover:bg-blue-600">Send</Button>
+                            <Input type="text" name="user_name"  placeholder="Full Name" className="bg-transparent text-white w-full mb-5 border border-gray-800" />
+                            <Input type="email" name="user_email" placeholder="Email" className="bg-transparent text-white w-full mb-5 border border-gray-800" />
+                            <Textarea  name="message" placeholder="Your Message" className="bg-transparent text-white w-full mb-5 border border-gray-800" />
+                            <Button type="submit" value="Send" className="text-white bg-blue-500 hover:bg-blue-600 rounded-full">Send</Button>
                         </form>
                     </div>
                 </div>

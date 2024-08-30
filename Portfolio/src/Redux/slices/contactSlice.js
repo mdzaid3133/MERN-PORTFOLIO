@@ -11,7 +11,7 @@ const initialState = {
 export const fetchContactData = createAsyncThunk('contact/fetchContactData', async (_, { rejectWithValue }) => {
     try {
         // Perform the API request
-        const response = axios.get('http://localhost:6001/admin/v1/contact');
+        const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/contact');
 
         // Show a loading toast while waiting for the response
         toast.promise(response, {
@@ -55,7 +55,7 @@ export const updateContactData = createAsyncThunk(
         const id = data[1]; // The ID to use in the API URL
   
         // Making the PUT request to update home data
-        const updatePromise = axios.put(`http://localhost:6001/admin/v1/contact/${id}`,dataObject,{
+        const updatePromise = axios.put(`https://mern-portfolio-ywxa.onrender.com/admin/v1/contact/${id}`,dataObject,{
           headers: { 'Content-Type': 'application/json' }
       });
   

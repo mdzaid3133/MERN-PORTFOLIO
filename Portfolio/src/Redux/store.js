@@ -11,6 +11,7 @@ import experienceReducer from './slices/experienceSlice';
 import contactReducer from './slices/contactSlice'; 
 import resumeReducer from './slices/resumeSlice'; 
 import authReducer from './slices/authSlice'; 
+import stateSlice from './slices/stateSlice'; 
 
 // // Configuration for persisting home state
 // const homePersistConfig = {
@@ -68,6 +69,7 @@ const store = configureStore({
     contact: contactReducer,
     resume: resumeReducer,
     auth: authReducer,
+    mode: stateSlice,
     // other reducers if you have
   },
 });

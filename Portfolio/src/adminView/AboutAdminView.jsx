@@ -81,8 +81,10 @@ function AboutAdminView() {
      <h1 className='text-2xl font-bold text-orange-600'> About Section</h1>
       <div className='mt-8 border p-5 rounded-lg bg-gray-900'>
       <FormControls controls={controls} formData={formData} setFormData={setFormData} setImagePreview={setImagePreview} imagePreview={imagePreview}  getImage={getImage} handleChange={handleChange} />
-      <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
-      onClick ={handleUpdate}>Add Info</button>
+       <div className='flex justify-end items-center'>
+       <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
+       onClick ={handleUpdate}>Update Info</button>
+       </div>
       </div>
     </div>
     </div>

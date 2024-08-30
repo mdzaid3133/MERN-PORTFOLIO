@@ -78,7 +78,7 @@ function AdminView() {
     }
   return (
     <div>
-        <nav className='p-5 bg-gray-800 text-white flex gap-4 justify-center'>
+        <nav className='p-5 bg-gray-800 text-white flex gap-4 justify-center fixed top-0 w-full'>
              {menuList
              ?.map(item => (
                  <button 

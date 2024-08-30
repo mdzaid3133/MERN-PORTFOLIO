@@ -15,6 +15,7 @@ function ResumeAdminView() {
       const result=  await dispatch(fetchResumeData());
       console.log('result', result);
       setFormData(result.payload.data[0]);
+      setImagePreview(result.payload.data[0].resumeImage.secure_url);
     })();
   }, []);
 
@@ -89,6 +90,10 @@ function ResumeAdminView() {
      <h1 className='text-2xl font-bold text-orange-600'> Upload Resume</h1>
       <div className='mt-8 border p-5 rounded-lg bg-gray-900'>
       <FormControls controls={controls} formData={formData} setFormData={setFormData} handleChange={handleChange} imagePreview={imagePreview} setImagePreview={setImagePreview} getImage={getImage}/>
+      
+      </div>
+
+      <div  className='mt-4 flex justify-end gap-4 items-center'>
       <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
        onClick={handelUpload}>Upload</button>
       </div>

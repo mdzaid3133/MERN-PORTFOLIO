@@ -13,7 +13,7 @@ export const addSkillData = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       // Create the POST request promise
-      const addPromise = axios.post('http://localhost:6001/admin/v1/skill', data);
+      const addPromise = axios.post('https://mern-portfolio-ywxa.onrender.com/admin/v1/skill', data);
       
       // Handle toast notifications with the promise
       toast.promise(addPromise, {
@@ -42,7 +42,7 @@ export const addSkillData = createAsyncThunk(
 export const fetchSkillData = createAsyncThunk('skill/fetchSkillData', async (_, { rejectWithValue }) => {
   try {
       // Perform the API request
-      const response = axios.get('http://localhost:6001/admin/v1/skill');
+      const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/skill');
 
       // Show a loading toast while waiting for the response
       toast.promise(response, {
@@ -82,7 +82,7 @@ export const deleteSkillData = createAsyncThunk(
   'skill/deleteSkillData',
   async (id, { rejectWithValue }) => {
     try {
-      const deletePromise = axios.delete(`http://localhost:6001/admin/v1/skill/${id}`);
+      const deletePromise = axios.delete(`https://mern-portfolio-ywxa.onrender.com/admin/v1/skill/${id}`);
 
       toast.promise(deletePromise, {
         pending: "Wait! Deleting skill data...",

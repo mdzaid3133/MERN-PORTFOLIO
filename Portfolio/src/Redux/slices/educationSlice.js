@@ -12,7 +12,7 @@ export const addEducationData = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       // Create the POST request promise
-      const addPromise = axios.post('http://localhost:6001/admin/v1/education', data,{
+      const addPromise = axios.post('https://mern-portfolio-ywxa.onrender.com/admin/v1/education', data,{
         headers: { 'Content-Type': 'application/json' }
       });
       
@@ -41,7 +41,7 @@ export const addEducationData = createAsyncThunk(
 export const fetchEducationtData = createAsyncThunk('education/fetchEducationtData', async (_, { rejectWithValue }) => {
     try {
         // Perform the API request
-        const response = axios.get('http://localhost:6001/admin/v1/education');
+        const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/education');
 
         // Show a loading toast while waiting for the response
         toast.promise(response, {
@@ -82,7 +82,7 @@ export const deleteEducationData = createAsyncThunk(
     async (id, { rejectWithValue }) => {
       try {
 
-        const deletePromise = axios.delete(`http://localhost:6001/admin/v1/education/${id}`);
+        const deletePromise = axios.delete(`https://mern-portfolio-ywxa.onrender.com/admin/v1/education/${id}`);
   
         toast.promise(deletePromise, {
           pending: "Wait! Deleting education data...",

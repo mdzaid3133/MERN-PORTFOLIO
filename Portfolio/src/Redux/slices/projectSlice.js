@@ -11,7 +11,7 @@ const initialState = {
 export const fetchProjectData = createAsyncThunk('project/fetchProjectData', async (_, { rejectWithValue }) => {
     try {
         // Perform the API request
-        const response = axios.get('http://localhost:6001/admin/v1/project');
+        const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/project');
 
         // Show a loading toast while waiting for the response
         toast.promise(response, {
@@ -56,7 +56,7 @@ export const deleteProjectData = createAsyncThunk(
         //console.log("Updating data for ID:", id);
   
         // Making the PUT request to update home data
-        const deletePromise = axios.delete(`http://localhost:6001/admin/v1/project/${id}`);
+        const deletePromise = axios.delete(`https://mern-portfolio-ywxa.onrender.com/admin/v1/project/${id}`);
   
         toast.promise(deletePromise, {
           pending: "Wait! Deleting project data...",
@@ -85,7 +85,7 @@ export const addProjectData = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       // Create the POST request promise
-      const addPromise = axios.post('http://localhost:6001/admin/v1/project', data);
+      const addPromise = axios.post('https://mern-portfolio-ywxa.onrender.com/admin/v1/project', data);
       
       // Handle toast notifications with the promise
       toast.promise(addPromise, {
@@ -119,7 +119,7 @@ export const updateProjectData = createAsyncThunk(
       console.log("Updating data for ID:", id);
 
       // Making the PUT request to update home data
-      const updatePromise = axios.put(`http://localhost:6001/admin/v1/project/${id}`, dataObject);
+      const updatePromise = axios.put(`https://mern-portfolio-ywxa.onrender.com/admin/v1/project/${id}`, dataObject);
 
       toast.promise(updatePromise, {
         pending: "Wait! Updating project data...",

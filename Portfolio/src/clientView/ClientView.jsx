@@ -10,8 +10,11 @@ import Home from '@/components/clientViewCompomemts/Home'
 import Project from '@/components/clientViewCompomemts/Project'
 import Skills from '@/components/clientViewCompomemts/Skills'
 import WorkExp from '@/components/clientViewCompomemts/WorkExp'
+import { useSelector } from 'react-redux'
 
 function ClientView() {
+  const { currentMode } = useSelector((store) => store.mode)
+  console.log('clientView', currentMode)
   return (
     <>
       <div className='relative'>
@@ -19,20 +22,23 @@ function ClientView() {
           <Header />
         </div>
         <div >
-          <Element name="home" className='bg-[#1c1b21] text-white w-full md:pt-12 pt-16'>
+          <Element name="home" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full md:pt-12 pt-16`}>
             <Home />
           </Element>
         </div>
 
         <div >
-          <Element name="about" className='bg-[#1c1b21] text-white w-full md:pt-12 pt-16'>
+          <Element name="about" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full md:pt-12 pt-16`}>
             <About />
           </Element>
         </div>
 
 
         <div >
-          <Element name="skills" className='bg-[#1c1b21] text-white w-full md:pt-12 pt-16'>
+          <Element name="skills" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full md:pt-12 pt-16`}>
             <Skills />
           </Element>
         </div>
@@ -40,34 +46,39 @@ function ClientView() {
 
 
         <div >
-          <Element name="projects" className='bg-[#1c1b21] text-white w-full md:pt-12 pt-16'>
+          <Element name="projects" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full md:pt-12 pt-16`}>
             <Project />
           </Element>
         </div>
 
 
         <div >
-          <Element name="education" className='bg-[#1c1b21] text-white w-full md:pt-12 pt-16'>
+          <Element name="education" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full md:pt-12 pt-16`}>
             <Education />
           </Element>
         </div>
 
 
         <div >
-          <Element name="experience" className='bg-[#1c1b21] text-white w-full md:pt-12 pt-16'>
+          <Element name="experience" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full md:pt-12 pt-16`}>
             <WorkExp />
           </Element>
         </div>
 
 
         <div >
-          <Element name="contact" className='bg-[#1c1b21] text-white w-full md:pt-12 pt-16'>
+          <Element name="contact" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full md:pt-12 pt-16`}>
             <Contact />
           </Element>
         </div>
 
 
-        <div className='bg-[#1c1b21] text-white'>
+        <div className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+            } w-full`}>
           <Footer />
         </div>
       </div>

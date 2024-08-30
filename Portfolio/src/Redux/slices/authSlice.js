@@ -10,7 +10,7 @@ const initialState = {
 
 export const login = createAsyncThunk('admin/login', async (data, { rejectWithValue }) => {
     try {
-        const loginResponse = axios.post('http://localhost:6001/admin/v1/user/login', data);
+        const loginResponse = axios.post('https://mern-portfolio-ywxa.onrender.com/admin/v1/user/login', data);
 
         toast.promise(
             loginResponse,

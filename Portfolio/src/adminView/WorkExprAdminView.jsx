@@ -162,7 +162,10 @@ function WorkExprAdminView() {
             handleChange={handleChange}
             getImage={getImage}
           />
-          <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
+        </div>
+
+        <div className='mt-4 flex justify-end gap-4 items-center'>
+        <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'
             onClick={handleAdd}>Add Info</button>
 
           <button type='button' className='bg-orange-400 p-3 rounded-full font-bold text-white'

@@ -4,6 +4,7 @@ import 'aos/dist/aos.css';
 import { useDispatch, useSelector } from 'react-redux';
 import store from '../../Redux/store'
 import { fetAboutData } from '@/Redux/slices/aboutSlice';
+import menImage from '../../assets/men.png';
 
 function About() {
 
@@ -34,12 +35,12 @@ function About() {
        </div>
         <div className='flex flex-wrap-reverse items-center justify-center md:gap-0 gap-8 md:py-20 py-10 '>
             <div className='md:w-1/2 w-full flex justify-center'>
-                <div data-aos="zoom-in" className='w-[400px] h-[400px] rounded-2xl overflow-hidden shadow-white shadow-md '>
-                    <img src={aboutData?.aboutImage?.secure_url || 'https://gravallvar.se/wp-content/uploads/2017/11/person-dummy.jpg'} className='w-[100%] h-[100%]'/>
+                <div style={{ borderRadius: "51% 49% 48% 52% / 32% 29% 71% 68% "}} data-aos="zoom-in" className='w-[400px] h-[400px] bg-blue-600 overflow-hidden shadow-white shadow-md '>
+                    <img src={menImage || 'https://gravallvar.se/wp-content/uploads/2017/11/person-dummy.jpg'} className='w-[100%] h-[100%]'/>
                 </div>
             </div>
             <div className='md:w-1/2 w-full'>
-                <h2 data-aos="fade-right" className='text-2xl text-center mb-6 text-blue-400 font-bold capitalize'>{aboutData?.title || 'Web Developer'}</h2>
+                <h2 data-aos="fade-right" className='text-2xl text-center mb-6 text-blue-500 font-bold capitalize'>{aboutData?.title || 'Web Developer'}</h2>
                 <p data-aos="fade-right" className='text-center'>{aboutData?.summary || 'I am a passionate and dedicated web developer who has recently graduated from a Utranchal university. I have a strong foundation in HTML, CSS, and JavaScript,I am also deeply passionate about Competitive Programming, which I find fascinating! 😍 Additionally, I have a keen interest in MERN Stack Development, which brings me great joy! 😁 I warmly welcome anyone interested to connect with me. 😊 and I am always eager to learn and improve my skills. My goal is to create high-quality and user-friendly websites that meet the needs of my clients.'}</p>
             </div>
         </div>
