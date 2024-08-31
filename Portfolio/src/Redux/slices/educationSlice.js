@@ -3,7 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import toast from "react-hot-toast";
 
 const initialState = {
-     educationsData : []
+     educationsData : [],
+     loading: false,
+     error: null,
  
 }
 
@@ -17,11 +19,11 @@ export const addEducationData = createAsyncThunk(
       });
       
       // Handle toast notifications with the promise
-      toast.promise(addPromise, {
-        pending: "Wait! Adding education data...",
-        success: (res) => res?.data?.message || 'Education data added successfully!',
-        error: (err) => err?.response?.data?.message || 'Failed to add education data',
-      });
+      // toast.promise(addPromise, {
+      //   pending: "Wait! Adding education data...",
+      //   success: (res) => res?.data?.message || 'Education data added successfully!',
+      //   error: (err) => err?.response?.data?.message || 'Failed to add education data',
+      // });
 
       // Await the POST request and get the response
       const response = await addPromise;
@@ -32,7 +34,7 @@ export const addEducationData = createAsyncThunk(
 
       // Handle specific error responses or generic error
       const errorMessage = error.response?.data?.message || 'An error occurred. Please try again later.';
-      toast.error(errorMessage);
+      // toast.error(errorMessage);
       return rejectWithValue(error.response?.data || { message: error.message });
     }
   }
@@ -44,19 +46,19 @@ export const fetchEducationtData = createAsyncThunk('education/fetchEducationtDa
         const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/education');
 
         // Show a loading toast while waiting for the response
-        toast.promise(response, {
-            pending: "Wait! Fetching education data...",
-            success: (res) => {
-                return res?.data?.message || 'Education data fetched successfully!';
-            },
-            error: (err) => {
-                return err?.response?.data?.message || 'Failed to fetch data';
-            }
-        });
+        // toast.promise(response, {
+        //     pending: "Wait! Fetching education data...",
+        //     success: (res) => {
+        //         return res?.data?.message || 'Education data fetched successfully!';
+        //     },
+        //     error: (err) => {
+        //         return err?.response?.data?.message || 'Failed to fetch data';
+        //     }
+        // });
 
         // Await the actual response and check for data existence
         const { data } = await response
-        console.log(data);
+
 
         if (!data) {
             throw new Error('No data returned from the server');
@@ -68,10 +70,10 @@ export const fetchEducationtData = createAsyncThunk('education/fetchEducationtDa
         console.error('Error fetching education data:', error);
         // Handle cases where `response` or `response.data` is undefined
         if (error.response && error.response.data) {
-            toast.error(error.response.data.message || 'An error occurred');
+            // toast.error(error.response.data.message || 'An error occurred');
             return rejectWithValue(error.response.data);
         } else {
-            toast.error('An error occurred. Please try again later.');
+            // toast.error('An error occurred. Please try again later.');
             return rejectWithValue(error.message);
         }
     }
@@ -84,11 +86,11 @@ export const deleteEducationData = createAsyncThunk(
 
         const deletePromise = axios.delete(`https://mern-portfolio-ywxa.onrender.com/admin/v1/education/${id}`);
   
-        toast.promise(deletePromise, {
-          pending: "Wait! Deleting education data...",
-          success: (res) => res?.data?.message || 'Education data deleted successfully!',
-          error: (err) => err?.response?.data?.message || 'Failed to delete data',
-        });
+        // toast.promise(deletePromise, {
+        //   pending: "Wait! Deleting education data...",
+        //   success: (res) => res?.data?.message || 'Education data deleted successfully!',
+        //   error: (err) => err?.response?.data?.message || 'Failed to delete data',
+        // });
   
         const response = await deletePromise;
         return response.data;
@@ -96,10 +98,10 @@ export const deleteEducationData = createAsyncThunk(
       } catch (error) {
         console.log('Error deleting education data:', error);
         if (error.response && error.response.data) {
-          toast.error(error.response.data.message || 'An error occurred');
+          // toast.error(error.response.data.message || 'An error occurred');
           return rejectWithValue(error.response.data);
         } else {
-          toast.error('An error occurred. Please try again later.');
+          // toast.error('An error occurred. Please try again later.');
           return rejectWithValue(error.message);
         }
       }
@@ -114,8 +116,8 @@ const educationSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchEducationtData.fulfilled, (state, action) => {
-                //console.log("action", action?.payload?.data)
                 state.educationsData = action.payload?.data
+                state.loading = true;
                 
             })
             .addCase(addEducationData.fulfilled, (state, action) => {
@@ -123,7 +125,6 @@ const educationSlice = createSlice({
               state.educationsData.push(action.payload?.data);
             })
             .addCase(deleteEducationData.fulfilled, (state, action) => {
-              //console.log("action", action?.payload?.data)
               state.educationsData = educationsData.filter(education => education._id !== action.payload?._id);
               
           });

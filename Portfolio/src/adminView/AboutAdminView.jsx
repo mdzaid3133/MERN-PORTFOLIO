@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FormControls from './fomControls/index';
 import { useDispatch } from 'react-redux';
 import { fetAboutData, updateAboutData } from '@/Redux/slices/aboutSlice';
+import { toast } from 'sonner';
 
 function AboutAdminView() {
   const [formData, setFormData] = useState({});
@@ -12,6 +13,11 @@ function AboutAdminView() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await dispatch(fetAboutData());
+      if(result?.payload?.status=== true){
+        toast.success('Data fetched successfully');
+      }else{
+        toast.error('Failed to fetch data');
+      }
       setFormData(result?.payload?.data[0]);
     };
 
@@ -49,7 +55,12 @@ function AboutAdminView() {
     for (const key in formData) {
       updatedFormData.append(key, formData[key]);
     }
-    await dispatch(updateAboutData([updatedFormData, formData?._id]));
+    const result = await dispatch(updateAboutData([updatedFormData, formData?._id]));
+    if(result?.payload?.status=== true){
+      toast.success('Data updated successfully');
+    }else{
+      toast.error('Failed to update data');
+    }
   };
 
   const controls = [

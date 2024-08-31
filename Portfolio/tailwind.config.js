@@ -71,6 +71,18 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      keyframes: {
+        spinIn: {
+          to: { transform: 'rotate(18deg)' }
+        },
+        spinOut: {
+          to: { transform: 'rotate(360deg)' }
+        }
+      },
+      animation: {
+        spinIn: 'spinIn 30s linear infinite',
+        spinout: 'spinIn 10s linear infinite',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

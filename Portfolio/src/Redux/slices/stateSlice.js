@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentMode: localStorage.getItem('mode') ? localStorage.getItem('mode') : undefined || 'light',
+  currentMode: localStorage.getItem('mode') ? localStorage.getItem('mode') : undefined || 'dark',
 };
 
 

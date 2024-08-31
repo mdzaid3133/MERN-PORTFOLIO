@@ -15,15 +15,15 @@ export const fetAboutData = createAsyncThunk('about/fetchAboutData', async (_, {
         const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/about');
 
         // Show a loading toast while waiting for the response
-        toast.promise(response, {
-            pending: "Wait! Fetching about data...",
-            success: (res) => {
-                return res?.data?.message || 'About data fetched successfully!';
-            },
-            error: (err) => {
-                return err?.response?.data?.message || 'Failed to fetch data';
-            }
-        });
+        // toast.promise(response, {
+        //     pending: "Wait! Fetching about data...",
+        //     success: (res) => {
+        //         return res?.data?.message || 'About data fetched successfully!';
+        //     },
+        //     error: (err) => {
+        //         return err?.response?.data?.message || 'Failed to fetch data';
+        //     }
+        // });
 
         // Await the actual response and check for data existence
         const { data } = await response
@@ -38,10 +38,10 @@ export const fetAboutData = createAsyncThunk('about/fetchAboutData', async (_, {
         console.error('Error fetching about data:', error);
         // Handle cases where `response` or `response.data` is undefined
         if (error.response && error.response.data) {
-            toast.error(error.response.data.message || 'An error occurred');
+            // toast.error(error.response.data.message || 'An error occurred');
             return rejectWithValue(error.response.data);
         } else {
-            toast.error('An error occurred. Please try again later.');
+            // toast.error('An error occurred. Please try again later.');
             return rejectWithValue(error.message);
         }
     }
@@ -54,16 +54,15 @@ export const updateAboutData = createAsyncThunk(
         const dataObject = data[0]; // The data to be updated
         const id = data[1]; // The ID to use in the API URL
   
-        console.log("Updating data for ID:", id);
   
         // Making the PUT request to update home data
         const updatePromise = axios.put(`https://mern-portfolio-ywxa.onrender.com/admin/v1/about/${id}`, dataObject);
   
-        toast.promise(updatePromise, {
-          pending: "Wait! Updating home data...",
-          success: (res) => res?.data?.message || 'About data updated successfully!',
-          error: (err) => err?.response?.data?.message || 'Failed to update data',
-        });
+        // toast.promise(updatePromise, {
+        //   pending: "Wait! Updating home data...",
+        //   success: (res) => res?.data?.message || 'About data updated successfully!',
+        //   error: (err) => err?.response?.data?.message || 'Failed to update data',
+        // });
   
         const response = await updatePromise;
         return response.data;
@@ -71,10 +70,10 @@ export const updateAboutData = createAsyncThunk(
       } catch (error) {
         console.log('Error updating about data:', error);
         if (error.response && error.response.data) {
-          toast.error(error.response.data.message || 'An error occurred');
+          // toast.error(error.response.data.message || 'An error occurred');
           return rejectWithValue(error.response.data);
         } else {
-          toast.error('An error occurred. Please try again later.');
+          // toast.error('An error occurred. Please try again later.');
           return rejectWithValue(error.message);
         }
       }
@@ -89,7 +88,7 @@ const aboutSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetAboutData.fulfilled, (state, action) => {
-                state.loading = false;
+                state.loading = true;
                 state.error = null;
                 state.aboutData = action.payload?.data[0];
                 

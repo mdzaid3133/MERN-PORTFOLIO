@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import { FaEdit } from "react-icons/fa";
 import store from '@/Redux/store';
+import { toast } from 'sonner';
 import { deleteProjectData, fetchProjectData, addProjectData, updateProjectData } from '@/Redux/slices/projectSlice';
 
 function ProjectAdminView() {
@@ -12,11 +13,15 @@ function ProjectAdminView() {
   const dispatch = useDispatch();
   const { projectsData } = useSelector((store) => store.project);
 
-  console.log("myFormData", formData);
 
   useEffect(() => {
     (async () => {
       const result = await dispatch(fetchProjectData());
+      if(result?.payload?.status=== true){
+        toast.success('Data fetched successfully');
+      }else{
+        toast.error('Failed to fetch data');
+      }
     })();
   }, []);
 
@@ -57,7 +62,12 @@ function ProjectAdminView() {
 
   const handleAdd = async () => {
     try {
-      await dispatch(addProjectData(addFormData));
+     const result = await dispatch(addProjectData(addFormData));
+     if(result?.payload?.status=== true){
+      toast.success('Data added successfully');
+    }else{
+      toast.error('Failed to add data');
+    }
     } catch (error) {
       console.error('Error adding skill data:', error);
     }
@@ -65,7 +75,12 @@ function ProjectAdminView() {
 
   const handleDelete = async (id) => {
     try {
-      await dispatch(deleteProjectData(id));
+      const result = await dispatch(deleteProjectData(id));
+      if(result?.payload?.status=== true){
+        toast.success('Data deleted successfully');
+      }else{
+        toast.error('Failed to delete data');
+      }
       dispatch(fetchProjectData());
     } catch (error) {
       console.error('Error deleting project data:', error);
@@ -74,7 +89,12 @@ function ProjectAdminView() {
 
   const handleUpdate = async () => {
     try {
-      await dispatch(updateProjectData([addFormData, formData._id]));
+      const result = await dispatch(updateProjectData([addFormData, formData._id]));
+      if(result?.payload?.status=== true){
+        toast.success('Data updated successfully');
+      }else{
+        toast.error('Failed to update data');
+      }
     } catch (error) {
       console.error("Error updatin project data : ", error);
     }
@@ -88,7 +108,6 @@ function ProjectAdminView() {
     // Format as YYYY-MM-DD
     const formattedDate = date.toISOString().split('T')[0];
 
-    console.log("object created", project);
   }
 
   const controls = [

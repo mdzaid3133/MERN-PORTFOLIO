@@ -5,6 +5,7 @@ import store from '@/Redux/store';
 import { addEducationData, deleteEducationData, fetchEducationtData } from '@/Redux/slices/educationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 
 function EducationAdminVIew() {
@@ -15,12 +16,16 @@ function EducationAdminVIew() {
 
   useEffect(() => {
     (async () => {
-      const resutl = await dispatch(fetchEducationtData());
+      const result = await dispatch(fetchEducationtData());
+      if(result?.payload?.status=== true){
+        toast.success('Data fetched successfully');
+      }else{
+        toast.error('Failed to fetch data');
+      }
       setFormData(educationsData);
     })();
   }, []);
 
-  console.log("objects loaded", educationsData)
 
 
   const handleChange = (e) => {
@@ -39,7 +44,12 @@ function EducationAdminVIew() {
         addFormData.append(key, formData[key]);
       }
 
-      await dispatch(addEducationData(addFormData));
+     const result = await dispatch(addEducationData(addFormData));
+     if(result?.payload?.status=== true){
+      toast.success('Data add successfully');
+    }else{
+      toast.error('Failed to add data');
+    }
     } catch (error) {
       console.error('Error adding education data:', error);
     }
@@ -47,7 +57,12 @@ function EducationAdminVIew() {
 
   const handleDelete = async (id) => {
     try {
-      await dispatch(deleteEducationData(id));
+     const result =  await dispatch(deleteEducationData(id));
+     if(result?.payload?.status=== true){
+      toast.success('Data deleted successfully');
+    }else{
+      toast.error('Failed to delete data');
+    }
       await dispatch(fetchEducationtData());
     } catch (error) {
       console.error('Error deleting education data:', error);

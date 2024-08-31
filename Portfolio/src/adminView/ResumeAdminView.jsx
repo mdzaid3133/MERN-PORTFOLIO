@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FormControls from './fomControls/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchResumeData, updateResumeData } from '@/Redux/slices/resumeSlice';
+import { toast } from 'sonner';
 
 function ResumeAdminView() {
   const [formData, setFormData] =  useState('');
@@ -13,13 +14,16 @@ function ResumeAdminView() {
   useEffect(() => {
     (async () => {
       const result=  await dispatch(fetchResumeData());
-      console.log('result', result);
+      if(result?.payload?.status=== true){
+        toast.success('Data fetched successfully');
+      }else{
+        toast.error('Failed to fetch data');
+      }
       setFormData(result.payload.data[0]);
       setImagePreview(result.payload.data[0].resumeImage.secure_url);
     })();
   }, []);
 
-  console.log("objects loaded",resumeData)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,7 +80,12 @@ function ResumeAdminView() {
       for (const key in formData) {
         updateFormData.append(key, formData[key])
 
-        await dispatch(updateResumeData([updateFormData, formData._id]));
+       const result =  await dispatch(updateResumeData([updateFormData, formData._id]));
+       if(result?.payload?.status=== true){
+        toast.success('Data updated successfully');
+      }else{
+        toast.error('Failed to update data');
+      }
       }
     } catch (error) {
         console.error('Error updating resume data:', error);

@@ -12,13 +12,14 @@ import ProjectCard from './ProjectCard'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjectData } from '@/Redux/slices/projectSlice';
 import store from '@/Redux/store';
+import ProjectSkeleton from '../skeleton/ProjectSkeleton';
 
 
 function Project() {
 
     const dispatch = useDispatch()
 
-    const { projectsData } = useSelector((store) => store.project)
+    const { projectsData,loading } = useSelector((store) => store.project)
     const {currentMode} = useSelector((store)=> store.mode)
 
 
@@ -26,7 +27,6 @@ function Project() {
     useEffect(() => {
         dispatch(fetchProjectData())
 
-        console.log(projectsData)
         AOS.init({
             offset: 200,
             duration: 600,
@@ -34,6 +34,10 @@ function Project() {
             delay: 100,
         });
     }, [])
+
+     if(!loading){
+        return <ProjectSkeleton/>
+     }
     return (
         <div className='my-component p-8 md:px-32'>
             <div className='flex  items-center justify-between'>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FormControls from './fomControls/index';
 import { useDispatch, useSelector } from 'react-redux';
 import store from '@/Redux/store';
+import { toast } from 'sonner';
 import { fetchContactData, updateContactData} from '@/Redux/slices/contactSlice';
 
 
@@ -13,12 +14,16 @@ function ContactAdminView() {
   useEffect(() => {
     (async () => {
      const result =  await dispatch(fetchContactData());
-     console.log(result)
+     if(result?.payload?.status=== true){
+      toast.success('Data fetched successfully');
+    }else{
+      toast.error('Failed to fetch data');
+    }
       setFormData(result?.payload?.data[0]);
     })();
   }, []);
 
-   console.log("objects loaded",contactData)
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +42,12 @@ function ContactAdminView() {
         addFormData.append(key, formData[key]);
       }
 
-    await dispatch(updateContactData([addFormData,contactData?._id]))
+    const result = await dispatch(updateContactData([addFormData,contactData?._id]))
+    if(result?.payload?.status=== true){
+      toast.success('Data upadted successfully');
+    }else{
+      toast.error('Failed to update data');
+    }
     await dispatch(fetchContactData())
     } catch (error) {
       console.error('Error updating contact data:', error);

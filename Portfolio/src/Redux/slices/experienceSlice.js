@@ -2,8 +2,11 @@ import axios from "axios";
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import toast from "react-hot-toast";
 
+
 const initialState = {
-     experiencesData : []
+     experiencesData : [],
+     loading:false,
+     error: null,
  
 }
 
@@ -15,11 +18,11 @@ export const addExperenceData = createAsyncThunk(
       const addPromise = axios.post('https://mern-portfolio-ywxa.onrender.com/admin/v1/experience', data);
       
       // Handle toast notifications with the promise
-      toast.promise(addPromise, {
-        pending: "Wait! Adding expernce data...",
-        success: (res) => res?.data?.message || 'expernce data added successfully!',
-        error: (err) => err?.response?.data?.message || 'Failed to add expernce data',
-      });
+      // toast.promise(addPromise, {
+      //   pending: "Wait! Adding expernce data...",
+      //   success: (res) => res?.data?.message || 'expernce data added successfully!',
+      //   error: (err) => err?.response?.data?.message || 'Failed to add expernce data',
+      // });
 
       // Await the POST request and get the response
       const response = await addPromise;
@@ -30,7 +33,7 @@ export const addExperenceData = createAsyncThunk(
 
       // Handle specific error responses or generic error
       const errorMessage = error.response?.data?.message || 'An error occurred. Please try again later.';
-      toast.error(errorMessage);
+      // toast.error(errorMessage);
       return rejectWithValue(error.response?.data || { message: error.message });
     }
   }
@@ -43,19 +46,19 @@ export const fetchExperienceData = createAsyncThunk('experience/fetchExperienceD
         const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/experience');
 
         // Show a loading toast while waiting for the response
-        toast.promise(response, {
-            pending: "Wait! Fetching experience data...",
-            success: (res) => {
-                return res?.data?.message || 'experience data fetched successfully!';
-            },
-            error: (err) => {
-                return err?.response?.data?.message || 'Failed to fetch data';
-            }
-        });
+        // toast.promise(response, {
+        //     pending: "Wait! Fetching experience data...",
+        //     success: (res) => {
+        //         return res?.data?.message || 'experience data fetched successfully!';
+        //     },
+        //     error: (err) => {
+        //         return err?.response?.data?.message || 'Failed to fetch data';
+        //     }
+        // });
 
         // Await the actual response and check for data existence
         const { data } = await response
-        console.log(data);
+
 
         if (!data) {
             throw new Error('No data returned from the server');
@@ -67,10 +70,10 @@ export const fetchExperienceData = createAsyncThunk('experience/fetchExperienceD
         console.error('Error fetching experience data:', error);
         // Handle cases where `response` or `response.data` is undefined
         if (error.response && error.response.data) {
-            toast.error(error.response.data.message || 'An error occurred');
+            // toast.error(error.response.data.message || 'An error occurred');
             return rejectWithValue(error.response.data);
         } else {
-            toast.error('An error occurred. Please try again later.');
+            // toast.error('An error occurred. Please try again later.');
             return rejectWithValue(error.message);
         }
     }
@@ -87,11 +90,11 @@ export const deleteExperienceData = createAsyncThunk(
         // Making the PUT request to update home data
         const deletePromise = axios.delete(`https://mern-portfolio-ywxa.onrender.com/admin/v1/experience/${id}`);
   
-        toast.promise(deletePromise, {
-          pending: "Wait! Deleting experience data...",
-          success: (res) => res?.data?.message || 'experience data deleted successfully!',
-          error: (err) => err?.response?.data?.message || 'Failed to delete data',
-        });
+        // toast.promise(deletePromise, {
+        //   pending: "Wait! Deleting experience data...",
+        //   success: (res) => res?.data?.message || 'experience data deleted successfully!',
+        //   error: (err) => err?.response?.data?.message || 'Failed to delete data',
+        // });
   
         const response = await deletePromise;
         return response.data;
@@ -99,10 +102,10 @@ export const deleteExperienceData = createAsyncThunk(
       } catch (error) {
         console.log('Error deleting experience data:', error);
         if (error.response && error.response.data) {
-          toast.error(error.response.data.message || 'An error occurred');
+          // toast.error(error.response.data.message || 'An error occurred');
           return rejectWithValue(error.response.data);
         } else {
-          toast.error('An error occurred. Please try again later.');
+          // toast.error('An error occurred. Please try again later.');
           return rejectWithValue(error.message);
         }
       }
@@ -117,16 +120,16 @@ export const deleteExperienceData = createAsyncThunk(
         const dataObject = data[0]; // The data to be updated
         const id = data[1]; // The ID to use in the API URL
   
-        console.log("Updating data for ID:", id);
+
   
         // Making the PUT request to update home data
         const updatePromise = axios.put(`https://mern-portfolio-ywxa.onrender.com/admin/v1/experience/${id}`, dataObject);
   
-        toast.promise(updatePromise, {
-          pending: "Wait! Updating experience data...",
-          success: (res) => res?.data?.message || 'Experience data updated successfully!',
-          error: (err) => err?.response?.data?.message || 'Failed to update data',
-        });
+        // toast.promise(updatePromise, {
+        //   pending: "Wait! Updating experience data...",
+        //   success: (res) => res?.data?.message || 'Experience data updated successfully!',
+        //   error: (err) => err?.response?.data?.message || 'Failed to update data',
+        // });
   
         const response = await updatePromise;
         return response.data;
@@ -134,10 +137,10 @@ export const deleteExperienceData = createAsyncThunk(
       } catch (error) {
         console.log('Error updating experience data:', error);
         if (error.response && error.response.data) {
-          toast.error(error.response.data.message || 'An error occurred');
+          // toast.error(error.response.data.message || 'An error occurred');
           return rejectWithValue(error.response.data);
         } else {
-          toast.error('An error occurred. Please try again later.');
+          // toast.error('An error occurred. Please try again later.');
           return rejectWithValue(error.message);
         }
       }
@@ -152,8 +155,8 @@ const experienceSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchExperienceData.fulfilled, (state, action) => {
-                console.log("action", action?.payload?.data)
                 state.experiencesData = action.payload?.data   
+                state.loading = true
             })
             .addCase(addExperenceData.fulfilled, (state, action) => {
               // Optionally update state based on the added skill

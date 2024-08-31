@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import store from '../../Redux/store'
 import { fetAboutData } from '@/Redux/slices/aboutSlice';
 import menImage from '../../assets/men.png';
+import AboutSkeleton from '../skeleton/AboutSkeleton';
 
 function About() {
 
    const dispatch = useDispatch()
-   const {aboutData} = useSelector((store) => store.about)
+   const {aboutData,loading} = useSelector((store) => store.about)
   
 
    useEffect(() => {
@@ -26,8 +27,13 @@ function About() {
       delay: 100,
     });
   },[])
+
+   if(!loading){
+    return <AboutSkeleton/>
+   }
+   
   return (
-    <div className=' my-component p-8 md:px-32'>
+    <div id= 'about' className=' my-component p-8 md:px-32'>
        <div className='flex  items-center justify-between'>
          <div className='bg-blue-500 h-1 w-full rounded-full'></div>
          <span data-aos="zoom-in" className='md:text-4xl text-2xl font-bold text-center whitespace-nowrap mx-5'>About<span className='text-blue-500 ml-3'>Me</span></span>
@@ -36,7 +42,7 @@ function About() {
         <div className='flex flex-wrap-reverse items-center justify-center md:gap-0 gap-8 md:py-20 py-10 '>
             <div className='md:w-1/2 w-full flex justify-center'>
                 <div style={{ borderRadius: "51% 49% 48% 52% / 32% 29% 71% 68% "}} data-aos="zoom-in" className='w-[400px] h-[400px] bg-blue-600 overflow-hidden shadow-white shadow-md '>
-                    <img src={menImage || 'https://gravallvar.se/wp-content/uploads/2017/11/person-dummy.jpg'} className='w-[100%] h-[100%]'/>
+                    <img src={aboutData?.aboutImage?.secure_url || menImage} className='w-[100%] h-[100%]'/>
                 </div>
             </div>
             <div className='md:w-1/2 w-full'>

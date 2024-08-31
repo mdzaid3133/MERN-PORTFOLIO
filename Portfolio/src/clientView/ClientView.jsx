@@ -21,66 +21,66 @@ function ClientView() {
         <div className='fixed top-0 z-50 w-full'>
           <Header />
         </div>
-        <div >
-          <Element name="home" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+        <section >
+          <Element id='home' name="home" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full md:pt-12 pt-16`}>
             <Home />
           </Element>
-        </div>
+        </section>
 
-        <div >
-          <Element name="about" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+        <section >
+          <Element id='about' name="about" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full md:pt-12 pt-16`}>
             <About />
           </Element>
-        </div>
+        </section>
 
 
-        <div >
+        <section >
           <Element name="skills" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full md:pt-12 pt-16`}>
             <Skills />
           </Element>
-        </div>
+        </section>
 
 
 
-        <div >
+        <section >
           <Element name="projects" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full md:pt-12 pt-16`}>
             <Project />
           </Element>
-        </div>
+        </section>
 
 
-        <div >
+        <section >
           <Element name="education" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full md:pt-12 pt-16`}>
             <Education />
           </Element>
-        </div>
+        </section>
 
 
-        <div >
+        <section >
           <Element name="experience" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full md:pt-12 pt-16`}>
             <WorkExp />
           </Element>
-        </div>
+        </section>
 
 
-        <div >
+        <section >
           <Element name="contact" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full md:pt-12 pt-16`}>
             <Contact />
           </Element>
-        </div>
+        </section>
 
 
-        <div className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+        <section className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
             } w-full`}>
           <Footer />
-        </div>
+        </section>
       </div>
     </>
   )

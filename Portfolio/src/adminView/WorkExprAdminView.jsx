@@ -3,6 +3,7 @@ import FormControls from './fomControls/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import store from '@/Redux/store';
+import { toast } from 'sonner';
 import { addExperenceData, deleteExperienceData, fetchExperienceData, updateExperienceData } from '@/Redux/slices/experienceSlice';
 
 function WorkExprAdminView() {
@@ -14,12 +15,16 @@ function WorkExprAdminView() {
   useEffect(() => {
     (async () => {
       const result = await dispatch(fetchExperienceData());
+      if(result?.payload?.status=== true){
+        toast.success('Data fetched successfully');
+      }else{
+        toast.error('Failed to fetch data');
+      }
       setFormData(experiencesData);
     })();
   }, []);
 
-  console.log("objects loaded", experiencesData)
-  console.log("formData", formData)
+
 
 
   const handleChange = (e) => {
@@ -33,7 +38,7 @@ function WorkExprAdminView() {
   const getImage = (event) => {
     event.preventDefault();
     const uploadedImage = event.target.files[0];
-    console.log("uploading image", uploadedImage)
+
 
     if (uploadedImage) {
       setFormData((prevState) => ({
@@ -56,7 +61,12 @@ function WorkExprAdminView() {
 
   const handleAdd = async () => {
     try {
-      await dispatch(addExperenceData(addFormData));
+      const result = await dispatch(addExperenceData(addFormData));
+      if(result?.payload?.status=== true){
+        toast.success('Data added successfully');
+      }else{
+        toast.error('Failed to add data');
+      }
     } catch (error) {
       console.error('Error adding experience data:', error);
     }
@@ -64,7 +74,12 @@ function WorkExprAdminView() {
 
   const handleUpdate = async () => {
     try {
-      await dispatch(updateExperienceData([addFormData, formData._id]));
+     const result =  await dispatch(updateExperienceData([addFormData, formData._id]));
+     if(result?.payload?.status=== true){
+      toast.success('Data updated successfully');
+    }else{
+      toast.error('Failed to update data');
+    }
     } catch (error) {
       console.error("Error updatin experience data : ", error);
     }
@@ -75,12 +90,16 @@ function WorkExprAdminView() {
     setFormData(experience);
     setImagePreview(experience?.expImage?.secure_url);
 
-    console.log("object created",experience);
   }
 
   const handleDelete = async (id) => {
     try {
-      await dispatch(deleteExperienceData(id));
+     const result =  await dispatch(deleteExperienceData(id));
+     if(result?.payload?.status=== true){
+      toast.success('Data deleted successfully');
+    }else{
+      toast.error('Failed to delete data');
+    }
       await dispatch(fetchExperienceData());
     } catch (error) {
       console.error('Error deleting experience data:', error);

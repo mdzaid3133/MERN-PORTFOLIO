@@ -12,10 +12,11 @@ import WorkCard from './WorkCard'
 import { useDispatch, useSelector } from 'react-redux';
 import store from '@/Redux/store';
 import { fetchExperienceData } from '@/Redux/slices/experienceSlice';
+import ExperenceSkeleton from '../skeleton/ExperenceSkeleton';
 
 function WorkExp() {
     const dispatch = useDispatch()
-    const { experiencesData } = useSelector((store) => store.experiences)
+    const { experiencesData,loading } = useSelector((store) => store.experiences)
 
     useEffect(() => {
         (async () => {
@@ -24,7 +25,6 @@ function WorkExp() {
     }, []);
 
     useEffect(() => {
-       console.log("00000000",experiencesData)
         AOS.init({
             offset: 200,
             duration: 600,
@@ -33,6 +33,11 @@ function WorkExp() {
         });
     }, [])
 
+
+     if(!loading){
+         return <ExperenceSkeleton/>
+     }
+     
     return (
         <div className=' my-component p-8 md:px-32'>
             <div className='flex  items-center justify-between'>

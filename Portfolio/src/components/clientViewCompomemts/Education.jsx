@@ -5,13 +5,13 @@ import EducationCard from './EducationCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEducationtData } from '@/Redux/slices/educationSlice';
 import store from '@/Redux/store';
+import EducationSkeleton from '../skeleton/EducationSkeleton';
 
 const Education = () => {
      const dispatch = useDispatch()
-     const {educationsData} = useSelector((store)=> store.education)
+     const {educationsData,loading} = useSelector((store)=> store.education)
     useEffect(()=>{
         dispatch(fetchEducationtData())
-        console.log(educationsData)
         AOS.init({
           offset: 200,
           duration: 600,
@@ -19,6 +19,11 @@ const Education = () => {
           delay: 100,
         });
       },[])
+
+      if(!loading){
+        return <EducationSkeleton/>
+      }
+
     return (
         <div className="my-component p-8 md:px-32">
             <div className='flex  items-center justify-between'>
@@ -35,6 +40,7 @@ const Education = () => {
                     educationsData && educationsData.map((education, index) => (
                         <EducationCard 
                            education={education}
+                           
                         />
                     )) || <p>Loading...</p>
                    }

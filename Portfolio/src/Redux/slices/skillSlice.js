@@ -5,6 +5,8 @@ import { toast } from 'react-hot-toast';
 // Initial state
 const initialState = {
   skillData: [],
+  loading: false,
+  error: null,
 };
 
 // Add skill data
@@ -16,11 +18,11 @@ export const addSkillData = createAsyncThunk(
       const addPromise = axios.post('https://mern-portfolio-ywxa.onrender.com/admin/v1/skill', data);
       
       // Handle toast notifications with the promise
-      toast.promise(addPromise, {
-        pending: "Wait! Adding skill data...",
-        success: (res) => res?.data?.message || 'Skill data added successfully!',
-        error: (err) => err?.response?.data?.message || 'Failed to add skill data',
-      });
+      // toast.promise(addPromise, {
+      //   pending: "Wait! Adding skill data...",
+      //   success: (res) => res?.data?.message || 'Skill data added successfully!',
+      //   error: (err) => err?.response?.data?.message || 'Failed to add skill data',
+      // });
 
       // Await the POST request and get the response
       const response = await addPromise;
@@ -31,7 +33,7 @@ export const addSkillData = createAsyncThunk(
 
       // Handle specific error responses or generic error
       const errorMessage = error.response?.data?.message || 'An error occurred. Please try again later.';
-      toast.error(errorMessage);
+      // toast.error(errorMessage);
       return rejectWithValue(error.response?.data || { message: error.message });
     }
   }
@@ -45,15 +47,15 @@ export const fetchSkillData = createAsyncThunk('skill/fetchSkillData', async (_,
       const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/skill');
 
       // Show a loading toast while waiting for the response
-      toast.promise(response, {
-          pending: "Wait! Fetching skill data...",
-          success: (res) => {
-              return res?.data?.message || 'Skill data fetched successfully!';
-          },
-          error: (err) => {
-              return err?.response?.data?.message || 'Failed to fetch data';
-          }
-      });
+      // toast.promise(response, {
+      //     pending: "Wait! Fetching skill data...",
+      //     success: (res) => {
+      //         return res?.data?.message || 'Skill data fetched successfully!';
+      //     },
+      //     error: (err) => {
+      //         return err?.response?.data?.message || 'Failed to fetch data';
+      //     }
+      // });
 
       // Await the actual response and check for data existence
       const { data } = await response
@@ -68,10 +70,10 @@ export const fetchSkillData = createAsyncThunk('skill/fetchSkillData', async (_,
       console.error('Error fetching skill data:', error);
       // Handle cases where `response` or `response.data` is undefined
       if (error.response && error.response.data) {
-          toast.error(error.response.data.message || 'An error occurred');
+          // toast.error(error.response.data.message || 'An error occurred');
           return rejectWithValue(error.response.data);
       } else {
-          toast.error('An error occurred. Please try again later.');
+          // toast.error('An error occurred. Please try again later.');
           return rejectWithValue(error.message);
       }
   }
@@ -84,11 +86,11 @@ export const deleteSkillData = createAsyncThunk(
     try {
       const deletePromise = axios.delete(`https://mern-portfolio-ywxa.onrender.com/admin/v1/skill/${id}`);
 
-      toast.promise(deletePromise, {
-        pending: "Wait! Deleting skill data...",
-        success: (res) => res?.data?.message || 'Skill data deleted successfully!',
-        error: (err) => err?.response?.data?.message || 'Failed to delete data',
-      });
+      // toast.promise(deletePromise, {
+      //   pending: "Wait! Deleting skill data...",
+      //   success: (res) => res?.data?.message || 'Skill data deleted successfully!',
+      //   error: (err) => err?.response?.data?.message || 'Failed to delete data',
+      // });
 
       const response = await deletePromise;
       return response.data;
@@ -97,10 +99,10 @@ export const deleteSkillData = createAsyncThunk(
       console.error('Error deleting skill data:', error);
 
       if (error.response && error.response.data) {
-        toast.error(error.response.data.message || 'An error occurred');
+        // toast.error(error.response.data.message || 'An error occurred');
         return rejectWithValue(error.response.data);
       } else {
-        toast.error('An error occurred. Please try again later.');
+        // toast.error('An error occurred. Please try again later.');
         return rejectWithValue(error.message);
       }
     }
@@ -115,8 +117,8 @@ const skillSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchSkillData.fulfilled, (state, action) => {
-        console.log(action.payload.data)
         state.skillData = action.payload?.data;
+        state.loading = true;
       })
       .addCase(addSkillData.fulfilled, (state, action) => {
         // Optionally update state based on the added skill

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FormControls from './fomControls/index';
 import { useDispatch } from 'react-redux';
 import { fetchHomeData, updateHomeData } from '@/Redux/slices/homeSlice';
+import { toast } from 'sonner';
 
 
 function HomeAdminView() {
@@ -13,6 +14,11 @@ function HomeAdminView() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await dispatch(fetchHomeData());
+      if(result?.payload?.status === true){
+        toast.success('Data fetched successfully');
+      }else{
+        toast.error('Failed to fetch data');
+      }
       setFormData(result?.payload?.data[0]);
     };
 
@@ -51,7 +57,12 @@ function HomeAdminView() {
       updatedFormData.append(key, formData[key]);
     }
 
-    await dispatch(updateHomeData([updatedFormData, formData?._id]));
+    const result = await dispatch(updateHomeData([updatedFormData, formData?._id]));
+    if(result?.payload?.statue === true){
+      toast.success('Data updated successfully');
+    }else{
+      toast.error('Failed to update data');
+    }
   };
 
   const controls = [

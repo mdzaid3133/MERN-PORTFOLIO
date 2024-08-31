@@ -15,15 +15,15 @@ export const fetchHomeData = createAsyncThunk('home/fetchHomeData', async (_, { 
         const response = axios.get('https://mern-portfolio-ywxa.onrender.com/admin/v1/home');
 
         // Show a loading toast while waiting for the response
-        toast.promise(response, {
-            pending: "Wait! Fetching home data...",
-            success: (res) => {
-                return res?.data?.message || 'Home data fetched successfully!';
-            },
-            error: (err) => {
-                return err?.response?.data?.message || 'Failed to fetch data';
-            }
-        });
+        // toast.promise(response, {
+        //     pending: "Wait! Fetching home data...",
+        //     success: (res) => {
+        //         return res?.data?.message || 'Home data fetched successfully!';
+        //     },
+        //     error: (err) => {
+        //         return err?.response?.data?.message || 'Failed to fetch data';
+        //     }
+        // });
 
         // Await the actual response and check for data existence
         const { data } = await response
@@ -38,7 +38,7 @@ export const fetchHomeData = createAsyncThunk('home/fetchHomeData', async (_, { 
         console.error('Error fetching home data:', error);
         // Handle cases where `response` or `response.data` is undefined
         if (error.response && error.response.data) {
-            toast.error(error.response.data.message || 'An error occurred');
+            // toast.error(error.response.data.message || 'An error occurred');
             return rejectWithValue(error.response.data);
         } else {
             toast.error('An error occurred. Please try again later.');
@@ -54,16 +54,15 @@ export const updateHomeData = createAsyncThunk(
         const dataObject = data[0]; // The data to be updated
         const id = data[1]; // The ID to use in the API URL
   
-        console.log("Updating data for ID:", id);
   
         // Making the PUT request to update home data
         const updatePromise = axios.put(`https://mern-portfolio-ywxa.onrender.com/admin/v1/home/${id}`, dataObject);
   
-        toast.promise(updatePromise, {
-          pending: "Wait! Updating home data...",
-          success: (res) => res?.data?.message || 'Home data updated successfully!',
-          error: (err) => err?.response?.data?.message || 'Failed to update data',
-        });
+        // toast.promise(updatePromise, {
+        //   pending: "Wait! Updating home data...",
+        //   success: (res) => res?.data?.message || 'Home data updated successfully!',
+        //   error: (err) => err?.response?.data?.message || 'Failed to update data',
+        // });
   
         const response = await updatePromise;
         return response.data;
@@ -74,7 +73,7 @@ export const updateHomeData = createAsyncThunk(
           toast.error(error.response.data.message || 'An error occurred');
           return rejectWithValue(error.response.data);
         } else {
-          toast.error('An error occurred. Please try again later.');
+          // toast.error('An error occurred. Please try again later.');
           return rejectWithValue(error.message);
         }
       }
@@ -89,8 +88,7 @@ const homeSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchHomeData.fulfilled, (state, action) => {
-                console.log("action", action?.payload?.data[0])
-                state.loading = false;
+                state.loading = true;
                 state.error = null;
                 state.homeData = action.payload?.data[0];
             })

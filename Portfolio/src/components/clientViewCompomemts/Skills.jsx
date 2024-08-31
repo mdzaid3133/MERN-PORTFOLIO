@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import store from '@/Redux/store';
 import { fetchSkillData } from '@/Redux/slices/skillSlice';
 import SkillCard from './SkillCard';
+import SkillSkeleton from '../skeleton/SkillSkeleton';
 
 function Skills() {
 
-  const { skillData } = useSelector((store) => store.skill)
-  const { currentMode } = useSelector((store) => store.mode)
+  const { skillData,loading } = useSelector((store) => store.skill)
+
 
   const dispatch = useDispatch()
 
@@ -27,7 +28,11 @@ function Skills() {
 
   const uniqueSkillSections = [...new Set(skillData.map(skill => skill.skillSection))];
 
-    console.log(uniqueSkillSections);
+
+   if(!loading){
+    return <SkillSkeleton/>
+   }
+   
   return (
     <div className=' my-component p-8 md:px-32'>
       <div className='flex  items-center justify-between'>
@@ -36,7 +41,7 @@ function Skills() {
         <div className='bg-blue-500 h-1 w-full rounded-full'></div>
       </div>
       <div className={`mt-10`}>
-        <div className={` grid md:grid-cols-2 grid-cols-1   gap-10  w-fllu md:w-[80%] m-auto text-center`}>
+        <div className={` grid md:grid-cols-2 grid-cols-1  gap-10  w-fllu md:w-[80%] m-auto text-center`}>
            {
              uniqueSkillSections&& uniqueSkillSections.map((section)=>{
               return (

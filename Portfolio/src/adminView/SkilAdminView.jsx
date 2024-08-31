@@ -3,6 +3,7 @@ import FormControls from './fomControls/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSkillData, deleteSkillData, fetchSkillData } from '@/Redux/slices/skillSlice';
 import { FaTrash } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 function SkillAdminView() {
   const [formData, setFormData] = useState({});
@@ -12,7 +13,12 @@ function SkillAdminView() {
 
   useEffect(() => {
     (async () => {
-      await dispatch(fetchSkillData());
+     const result= await dispatch(fetchSkillData());
+     if(result?.payload?.status=== true){
+      toast.success('Data fetched successfully');
+    }else{
+      toast.error('Failed to fetch data');
+    }
       setFormData(skillData);
     })();
   }, []);
@@ -72,7 +78,13 @@ function SkillAdminView() {
         addFormData.append(key, formData[key]);
       }
 
-      await dispatch(addSkillData(addFormData));
+      const result = await dispatch(addSkillData(addFormData));
+      if(result?.payload?.status=== true){
+        toast.success('Data added successfully');
+      }else{
+        toast.error('Failed to add data');
+      }
+      console.log('>>>>>>>>>>>>',result);
     } catch (error) {
       console.error('Error adding skill data:', error);
     }
@@ -80,7 +92,12 @@ function SkillAdminView() {
 
   const handleDelete = async (id) => {
     try {
-      await dispatch(deleteSkillData(id));
+      const result = await dispatch(deleteSkillData(id));
+      if(result?.payload?.status=== true){
+        toast.success('Data deleted successfully');
+      }else{
+        toast.error('Failed to delete data');
+      }
       dispatch(fetchSkillData());
     } catch (error) {
       console.error('Error deleting skill data:', error);
