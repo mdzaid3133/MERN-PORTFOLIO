@@ -56,7 +56,8 @@ function Home() {
 
   return (
     <>
-      <div className={` my-component flex flex-wrap justify-between px-5 md:px-32 md:py-[7.3rem] py-[3rem] gap-12 md:gap-0`}>
+      <section className={` my-component flex flex-wrap justify-between px-5 md:px-32 md:py-[7.3rem] py-[3rem] gap-12 md:gap-0`}>
+
       <div className="text-center md:text-left md:w-1/2 w-full">
           <div>
             <div data-aos="fade-right" className="mb-14 flex flex-col">
@@ -113,7 +114,7 @@ function Home() {
               href={homeData?.gitHubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className=" hover-gradient border border-gray-800 text-blue-500 bg-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition duration-500 ease-in"
+              className="  border border-gray-800 text-blue-500 bg-white hover:bg-blue-500 w-8 h-8 flex items-center justify-center rounded-full  hover:text-white transition duration-300 ease-in"
             >
               <FaGithub size={15} data-aos="fade-left" />
             </a>
@@ -121,7 +122,7 @@ function Home() {
               href={homeData?.linkdinLink}
               target="_blank"
               rel="noopener noreferrer"
-              className=" hover-gradient border border-gray-800 text-blue-500 bg-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-500 ease-in"
+              className=" border border-gray-800 text-blue-500 bg-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in"
             >
               <FaLinkedin size={15} data-aos="fade-left" />
             </a>
@@ -129,7 +130,7 @@ function Home() {
               href={homeData?.instagramLink}
               target="_blank"
               rel="noopener noreferrer"
-              className=" hover-gradient border border-gray-800 text-blue-500 bg-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-500 ease-in"
+              className=" border border-gray-800 text-blue-500 bg-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in"
             >
               <FaInstagram size={15} data-aos="fade-left" />
             </a>
@@ -137,12 +138,12 @@ function Home() {
               href={homeData?.letCodeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className=" hover-gradient border border-gray-800 text-blue-500 bg-white w-8 h-8  flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-5000 ease-in"
+              className="  border border-gray-800 text-blue-500 bg-white w-8 h-8  flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300  ease-in"
             >
               <img
                 src="https://img.icons8.com/?size=100&id=9L16NypUzu38&format=png&color=000000"
                 alt="LeetCode"
-                className=" hover-gradient w-6 h-6 rounded-full transition-all duration-500 ease-in"
+                className=" w-6 h-6 rounded-full transition-all duration-300 ease-in"
               />
             </a>
           </div>
@@ -159,7 +160,7 @@ function Home() {
 
         </div>
          
-      </div>
+      </section>
     </>
   );
 }
