@@ -4,7 +4,6 @@ import User from "../models/user.model.js";
 const login = async(req,res,next)=>{
    try {
     const {email,password} = req.body;
-    console.log(email,password)
 
     if(!email || !password){
         return res.status(400).json({message:"All fields must be provided"})
