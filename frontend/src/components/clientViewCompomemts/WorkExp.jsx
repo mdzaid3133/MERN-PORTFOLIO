@@ -46,7 +46,7 @@ function WorkExp() {
                 <div className='bg-blue-500 h-1 w-full rounded-full'></div>
             </div>
 
-            <div className=' relative md:w-[73%] m-auto md:mt-24 mt-10 w-full md:px-10 px-8'>
+            <div className=' relative md:w-[73%] m-auto md:mt-24 mt-10 w-full md:px-10 px-4'>
                 <Carousel
                     opts={{
                         align: "start",
