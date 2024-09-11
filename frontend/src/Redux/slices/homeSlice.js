@@ -66,6 +66,7 @@ export const updateHomeData = createAsyncThunk(
   
         const response = await updatePromise;
         return response.data;
+        console.log(response.data);
   
       } catch (error) {
         console.log('Error updating home data:', error);

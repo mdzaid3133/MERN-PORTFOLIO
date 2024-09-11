@@ -39,8 +39,8 @@ const Header = () => {
      return <HeaderSkeleton/>
    }
   return (
-    <div className={`my-component ${currentMode === 'dark' ? ' bg-[#28262f] text-white' : 'bg-slate-200 text-gray-800'} shadow-sm `}>
-      <div className="flex justify-between items-center p-5 md:px-32">
+    <div className={`my-component ${currentMode === 'dark' ? ' bg-[#28262f] text-white' : 'bg-slate-200 text-gray-800'} shadow-md`}>
+      <div className="flex justify-between items-center py-4 md:px-32 px-5 ">
         <div className="text-2xl font-bold">
           <a href="/">
            <div className={` ${currentMode === 'dark' ? ' border-white' : 'border-gray-800'} border p-1 space-x-3 rounded-md`}>
@@ -50,7 +50,7 @@ const Header = () => {
           </a>
         </div>
       
-        <nav className="hidden md:flex space-x-6">
+        <nav className={`hidden md:flex space-x-6 border p-2 px-6 rounded-full ${currentMode === 'dark' ? ' border-slate-400' : 'border-gray-800'}`}>
           <Link to="home"smooth={true} duration={500}>
             <span onClick={()=> handleTabChange('Home')}
             className={`font-semibold hover:text-blue-500 transition duration-200 hover:border-b-2 cursor-pointer ${activeTab === 'Home' ? 'text-blue-500 border-b-2 border-blue-600' : ""}`}>
@@ -95,20 +95,25 @@ const Header = () => {
           </Link>
         </nav>
 
-         <div className='flex items-center gap-5'>
+         <div className='flex items-center gap-10'>
          <div>
         {
           currentMode === 'light'? (
             <IoSunnySharp 
              onClick={chnageMode}
-            size={30} className='text-2xl cursor-pointer'/>
+            size={20} className='text-2xl cursor-pointer'/>
           ) : (
             <FaMoon 
              onClick={chnageMode}
-            size={30} className='text-2xl cursor-pointer'/>
+            size={20} className='text-2xl cursor-pointer'/>
           )
         }
         </div>
+
+        <div className="hidden md:flex">
+          <DigitalClock />
+        </div>
+       
 
         <div className="md:hidden">
           <button onClick={toggleMenu}>
@@ -117,10 +122,7 @@ const Header = () => {
         </div>
          </div>
 
-        <div className="hidden md:flex">
-          <DigitalClock />
-        </div>
-       
+        
       </div>
 
       {/* Mobile Menu */}

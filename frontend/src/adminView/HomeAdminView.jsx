@@ -58,7 +58,8 @@ function HomeAdminView() {
     }
 
     const result = await dispatch(updateHomeData([updatedFormData, formData?._id]));
-    if(result?.payload?.statue === true){
+    console.log("updatedFormData",result)
+    if(result?.payload?.status === true){
       toast.success('Data updated successfully');
     }else{
       toast.error('Failed to update data');

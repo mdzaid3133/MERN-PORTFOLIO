@@ -21,12 +21,18 @@ function ClientView() {
         <div className='fixed top-0 z-50 w-full'>
           <Header />
         </div>
-        <section >
-          <Element id='home' name="home" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
-            } w-full md:pt-12 pt-16`}>
+        <section className={`py-[4rem] md:py-[5rem] w-full   ${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
+          }`}>
+          <Element
+            id='home'
+            name='home'
+            className={`w-full pt-[3rem]`}
+          >
+
             <Home />
           </Element>
         </section>
+
 
         <section >
           <Element id='about' name="about" className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
@@ -78,7 +84,7 @@ function ClientView() {
 
 
         <section className={`${currentMode === 'dark' ? 'bg-[#1c1b21] text-white' : 'bg-slate-200 text-gray-800'
-            } w-full`}>
+          } w-full`}>
           <Footer />
         </section>
       </div>

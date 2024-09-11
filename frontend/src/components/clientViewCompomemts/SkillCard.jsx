@@ -6,7 +6,7 @@ function SkillCard({ skills,section }) {
     
     return (
 
-        <div data-aos="zoom-in" className={`border p-3 border-gray-500 rounded-md  `}>
+        <div data-aos="zoom-in" className={`border p-3 border-gray-500 rounded-md `}>
             <h2 className='text-2xl text-blue-500 mb-3 font-bold capitalize'>{section}</h2>
 
             <div className='flex flex-wrap gap-2 justify-center items-center'>

@@ -87,7 +87,7 @@ function Contact() {
 
         <div className='flex  flex-wrap md:justify-between justify-center items-center md:gap-0 gap-8'>
           {/* my Details */}
-          <div data-aos="slide-right" className='my-component md:w-1/2 w-full flex justify-center md:justify-start '>
+          <div data-aos="slide-right" className='my-component md:w-1/2 w-full flex justify-start '>
             <pre className='my-component text-sm md:text-base'>
               {`const myDetais = {
   name: "${contactData?.username}",
@@ -101,8 +101,8 @@ function Contact() {
           </div>
 
           {/* contact form */}
-          <div data-aos="flip-left" className='flex md:justify-end justify-center'>
-            <div className={`md:w-[400px] w-full rounded-lg border p-4 ${currentMode === 'dark' ? 'border-slate-200' : 'border-gray-800'}`}>
+          <div data-aos="flip-left" className='md:w-1/2 w-full  justify-center'>
+            <div className={`md:w-[400px] md:float-end w-full rounded-lg border p-4 ${currentMode === 'dark' ? 'border-slate-200' : 'border-gray-800'}`}>
               <form ref={form} onSubmit={sendEmail} className={`${currentMode === 'dark' ? 'placeholder:text-white ' : 'placeholder:text-gray-800 '}`}>
                 <Input onChange={handleChange} type="text" name="user_name" placeholder="Full Name" className="  bg-transparent  w-full mb-5 border border-gray-800" />
                 <Input onChange={handleChange} type="email" name="user_email" placeholder="Email" className="  bg-transparent  w-full mb-5 border border-gray-800" />

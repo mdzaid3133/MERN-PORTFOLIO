@@ -26,6 +26,8 @@
   background: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%);
 }
 
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -94,7 +96,9 @@
 }
 
 
-
-html {
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
 }

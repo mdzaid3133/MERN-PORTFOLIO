@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 import { Cursor, useTypewriter } from 'react-simple-typewriter';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -8,11 +9,17 @@ import { fetchHomeData } from '../../Redux/slices/homeSlice';
 import { fetchResumeData } from '@/Redux/slices/resumeSlice';
 import menImage from '../../assets/men.png';
 import HomeSkeleton from '../skeleton/HomeSkeleton';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 
 function Home() {
   const dispatch = useDispatch();
-  const { homeData,loading } = useSelector((store) => store.home);
+  const { homeData, loading } = useSelector((store) => store.home);
   const { resumeData } = useSelector((store) => store.resume);
   const { currentMode } = useSelector((store) => store.mode);
 
@@ -52,13 +59,36 @@ function Home() {
     loop: true,
   });
 
-  if (!loading) return <div className={` my-component flex flex-wrap justify-between px-5 md:px-32 md:py-[7.3rem] py-[3rem] gap-12 md:gap-0`}><HomeSkeleton/></div>;
+  const iconObject = [
+    {
+      icon: FaGithub, // React icon component
+      link: homeData?.gitHubLink, // Dynamic GitHub link
+      title: 'GitHub'
+    },
+    {
+      icon: FaLinkedin, // React icon component
+      link: homeData?.linkdinLink, // Dynamic LinkedIn link
+      title: 'Linkedin'
+    },
+    {
+      icon: SiLeetcode, // React icon component
+      link: homeData?.letCodeLink, // Dynamic LeetCode link
+      title: 'Leet Code'
+    },
+    {
+      icon: FaInstagram, // React icon component
+      link: homeData?.instagramLink, // Dynamic Instagram link
+      title: 'Instagram'
+    }
+  ];
+
+
+  if (!loading) return <div className={` my-component flex flex-wrap justify-between px-5 md:px-32 md:py-[7.3rem] py-[3rem] gap-12 md:gap-0`}><HomeSkeleton /></div>;
 
   return (
     <>
-      <section className={` my-component flex flex-wrap justify-between px-5 md:px-32 md:py-[7.3rem] py-[3rem] gap-12 md:gap-0`}>
-
-      <div className="text-center md:text-left md:w-1/2 w-full">
+      <section className={` my-component flex flex-wrap justify-between items-center px-5 md:px-32  gap-12 md:gap-0`}>
+        <div className="text-center md:text-left md:w-1/2 w-full">
           <div>
             <div data-aos="fade-right" className="mb-14 flex flex-col">
               <h1 className={``}>
@@ -109,43 +139,33 @@ function Home() {
             </div>
           </div>
 
-          <div className="flex gap-3 mt-8 justify-center md:justify-start">
-            <a
-              href={homeData?.gitHubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="  border border-gray-800 text-blue-500 bg-white hover:bg-blue-500 w-8 h-8 flex items-center justify-center rounded-full  hover:text-white transition duration-300 ease-in"
-            >
-              <FaGithub size={15} data-aos="fade-left" />
-            </a>
-            <a
-              href={homeData?.linkdinLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className=" border border-gray-800 text-blue-500 bg-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in"
-            >
-              <FaLinkedin size={15} data-aos="fade-left" />
-            </a>
-            <a
-              href={homeData?.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className=" border border-gray-800 text-blue-500 bg-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in"
-            >
-              <FaInstagram size={15} data-aos="fade-left" />
-            </a>
-            <a
-              href={homeData?.letCodeLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="  border border-gray-800 text-blue-500 bg-white w-8 h-8  flex items-center justify-center rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300  ease-in"
-            >
-              <img
-                src="https://img.icons8.com/?size=100&id=9L16NypUzu38&format=png&color=000000"
-                alt="LeetCode"
-                className=" w-6 h-6 rounded-full transition-all duration-300 ease-in"
-              />
-            </a>
+
+          <div className="flex gap-6 mt-14 justify-center md:justify-start">
+            {
+              iconObject.map((icon, index) => (
+                icon.icon && (
+                  <a
+                    key={index}  // Add a unique key
+                    href={icon.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-gray-800 text-blue-500 bg-white hover:bg-blue-500 w-8 h-8 flex items-center justify-center rounded-full hover:text-white transition duration-300 ease-in"
+                  >
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <icon.icon />  {/* Render the icon component */}
+                        </TooltipTrigger>
+                        <TooltipContent className="mb-3">
+                          {icon.title}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </a>
+                )
+              ))
+            }
+
           </div>
         </div>
 
@@ -159,7 +179,7 @@ function Home() {
           </div>
 
         </div>
-         
+
       </section>
     </>
   );

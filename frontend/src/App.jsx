@@ -5,40 +5,37 @@ import SignIn from './adminView/SignIn';
 import ReqAuth from './adminView/authHelper/ReqAuth';
 import Loader from './components/clientViewCompomemts/Loader';
 import { useEffect, useState } from 'react';
-// import { PersistGate } from 'redux-persist/integration/react';
-// import store, { persistor } from './Redux/store'; // Import your store and persistor if needed
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);  // Loading state
 
   useEffect(() => {
-    // Simulate an async operation or data fetching
+    // Simulate loading for 3 seconds
     const timer = setTimeout(() => {
-      setLoading(false); // Hide loader after a delay (simulating loading complete)
-    }, 3000); // Adjust the delay as needed
+      setLoading(false); // Hide the loader
+    }, 3000);
 
-    // Cleanup function to clear the timer if the component unmounts
+    // Cleanup timer
     return () => clearTimeout(timer);
   }, []);
 
+  // If the app is still loading, show the Loader component
   if (loading) {
-    return <Loader />; // Show loading component while app is loading
+    return  <Loader />;
   }
 
+  // Once loading is complete, render the main app
   return (
     <BrowserRouter>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
       <Routes>
         <Route path="/" exact element={<ClientView />} />
         <Route path="/login" element={<SignIn />} />
 
-        {/* Protected Routes */}
+        {/* Protected routes for Admin access */}
         <Route element={<ReqAuth allowedRoles={['ADMIN']} />}>
           <Route path="/admin" element={<AdminView />} />
-          {/* Add more protected routes here */}
         </Route>
       </Routes>
-      {/* </PersistGate> */}
     </BrowserRouter>
   );
 }
